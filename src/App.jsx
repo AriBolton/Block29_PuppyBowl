@@ -2,6 +2,7 @@
 
 // Import the Players component, which we'll use to show a list of players
 import Players from "./features/Players";
+
 // Define the App component
 function App() {
   // This component renders the Players component inside a div

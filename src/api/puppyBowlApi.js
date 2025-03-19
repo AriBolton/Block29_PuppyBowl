@@ -9,7 +9,7 @@ export const puppyBowlApi = createApi({
     // Define a base query function that all endpoints will use as the base of their request
     baseQuery: fetchBaseQuery({
         // The base URL for all requests
-        baseUrl: "https://fsa-puppy-bowl.herokuapp.com/api/2411-ftb-et-web-pt",
+        baseUrl: "https://fsa-puppy-bowl.herokuapp.com/api/2411-ftb-et-web-pt-ab",
     }),
     // Define endpoints for our API service
     endpoints: (builder) => ({

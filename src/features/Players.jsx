@@ -4,12 +4,18 @@
 import {
     usePlayersQuery,
 } from "../api/puppyBowlApi";
+import NavBar from "./NavBar";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 // Define a new React component
 const Players = () => {
     // Use the generated hook to fetch data from the API
     // When the component is first rendered, it will start the API fetch
     // It will re-render each time the fetch status changes (e.g., "loading", "data arrived", "error")
     const { data = {}, error, isLoading } = usePlayersQuery();
+    const navigate = useNavigate();
+    const [searchParameter, setSearchParameter] = useState("");
 
     // Show a loading message while data is being fetched
     if (isLoading) {
@@ -30,26 +36,78 @@ const Players = () => {
     }
     console.log(data)
 
+    const playersToDisplay =
+        searchParameter !== "" && data.data.players
+            ? data.data.players.filter(
+                (player) =>
+                    player.name.toUpperCase().includes(searchParameter.toUpperCase()) ||
+                    player.breed.toLowerCase().includes(searchParameter.toLowerCase())
+            )
+            : data.animals;
+
     // Show the fetched data after it has arrived
     return (
-        <div className="players">
-            {/* Map through the data array and generate a div for each player */}
-            {data.data.players.map((player) => (
-                // Use the player's ID as the key for this div
-                <div key={player.id} className="player-card">
-                    {/* Display the player's image, with the player's name as alt text */}
-                    <img className="player-image" src={player.imageUrl} />
-                    <div className="player-details">
-                        <h2> {player.name} </h2>
-
-                        <p> {player.breed} </p>
-
-                        <p> {player.status} </p>
+        <section>
+            <NavBar
+                searchParameter={searchParameter}
+                setSearchParameter={setSearchParameter}
+            />
+            <div className="players">
+                {/* Map through the data array and generate a div for each player */}
+                {playersToDisplay.map((player) => (
+                    // Use the player's ID as the key for this div
+                    <div key={player.id} className="player-card">
+                        {/* Display the player's image, with the player's name as alt text */}
+                        <img className="player-image" src={player.imageUrl} alt="" />
+                        <div className="player-details">
+                            <h2>{player.name}</h2>
+                            <p>{player.breed}</p>
+                            <p>{player.status}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+        </section>
     );
+
+    // <div className="players">
+    //     {/* Map through the data array and generate a div for each player */}
+    //     {data.data.players.map((player) => (
+    //         // Use the player's ID as the key for this div
+    //         <div key={player.id} className="player-card">
+    //             {/* Display the player's image, with the player's name as alt text */}
+    //             <img className="player-image" src={player.imageUrl} />
+    //             <div className="player-details">
+    //                 <h2> {player.name} </h2>
+
+    //                 <p> {player.breed} </p>
+
+    //                 <p> {player.status} </p>
+    //             </div>
+    //         </div>
+    //     ))}
+    // </div>
+
+    //         <section className="animalList">
+    //             <NavBar
+    //                 searchParameter={searchParameter}
+    //                 setSearchParameter={setSearchParameter}
+    //             />
+    //             {animalsToDisplay.map((animalObj) => (
+    //                 <div
+    //                     className="card"
+    //                     key={animalObj.animal_id}
+    //                     onClick={() => navigate(`/animals/${animalObj.animal_id}`)}
+    //                 >
+    //                     <div
+    //                         className="img"
+    //                         style={{ backgroundImage: `url(${animalObj.img_url})` }}
+    //                     />
+    //                     <h2>{animalObj.name}</h2>
+    //                 </div>
+    //             ))}
+    //         </section>
+    //     );
 };
 
 // Export the component so it can be imported and used in other files
