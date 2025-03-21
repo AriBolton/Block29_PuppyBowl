@@ -30,41 +30,26 @@ body {
 
 /* Styling for the container that holds the player cards. */
 .players {
-    display: flex;
-    /* The player cards are displayed using flexbox. */
-    flex-wrap: wrap;
-    /* The player cards will wrap onto the next line if there is not enough space. */
-    /* The player cards are centered on the line. */
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 /* Styling for individual player cards. */
 .player-card {
-    width: 360px;
-    /* The width of the card. */
-    height: 380px;
-    /* The height of the card. */
-    margin: 10px;
-    /* The margin around the card. */
     background-color: white;
-    /* The background color of the card. */
-    border: 3px solid black;
-    /* The border around the card. */
-    border-radius: 3%;
-    /* The radius of the card's corners. */
-    /* The shadow effect around the card. */
-    overflow: hidden;
-    /* Any content that goes outside the card will be hidden. */
-    position: relative;
-    /* The card's position is set to relative so it can be moved using the transform property. */
-    transition: transform 0.3s;
-    /* Transition effect for the transform property. */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    transition: transform 0.2s;
 }
 
 /* Styling for when a user hovers over a player card. */
 .player-card:hover {
     transform: translateY(-5px);
-    /* The card moves up 5 pixels when hovered over. */
 }
 
 /* Styling for the container that holds the player's image. */
@@ -83,30 +68,158 @@ body {
 
 /* Styling for the player's image. */
 .player-image {
-    width: 250px;
-    /* The width of the image. */
-    height: 150px;
-    /* The height of the image. */
-    object-fit: contain;
-    /* The image will cover the entire area of its container without distorting its aspect ratio. */
-    margin-left: 12px;
-    /* The margin to the left of the image. */
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 
 /* Styling for the player's details (name, breed, status). */
 .player-details {
+    padding: 10px;
+}
+
+/* Create Puppy Form Styles */
+.create-puppy-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-puppy-form div {
+    margin-bottom: 15px;
+}
+
+.create-puppy-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.create-puppy-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.create-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-button:hover {
+    background-color: #45a049;
+}
+
+/* Puppy Details Styles */
+.puppy-details {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.puppy-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     display: flex;
-    /* The detailss are displayed using flexbox. */
     flex-direction: column;
-    /* The details are arranged in a column. */
     align-items: center;
-    /* The details are centered along the vertical axis. */
-    justify-content: center;
-    /* The details are centered along the horizontal axis. */
-    color: #000;
-    /* The color of the details text. */
-    font-size: 16px;
-    /* The size of the details text. */
+}
+
+.puppy-image {
+    max-width: 300px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.puppy-info {
     text-align: center;
-    /* The details text is centered. */
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.details-button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.details-button:hover {
+    background-color: #1976D2;
+}
+
+.delete-button {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
+/* Player Card Styles */
+.player-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+}
+
+.player-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.player-details {
+    padding: 10px;
+}
+
+.details-button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.details-button:hover {
+    background-color: #1976D2;
 }

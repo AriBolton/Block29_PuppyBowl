@@ -13,16 +13,36 @@ export const puppyBowlApi = createApi({
     }),
     // Define endpoints for our API service
     endpoints: (builder) => ({
-        // Define an endpoint that fetches players
+        // Define an endpoint that fetches all players
         players: builder.query({
             query: () => "/players",
         }),
-        // The part of the URL that comes after the baseUrl for this specific endpoint
-
+        // Define an endpoint that fetches a single player by ID
+        player: builder.query({
+            query: (id) => `/players/${id}`,
+        }),
+        // Define an endpoint to create a new player
+        createPlayer: builder.mutation({
+            query: (player) => ({
+                url: "/players",
+                method: "POST",
+                body: player,
+            }),
+        }),
+        // Define an endpoint to delete a player
+        deletePlayer: builder.mutation({
+            query: (id) => ({
+                url: `/players/${id}`,
+                method: "DELETE",
+            }),
+        }),
     }),
 });
 
-// Export hooks for each endpoint - in this case, a React hook that triggers the fetchPlayers query
+// Export hooks for each endpoint
 export const {
     usePlayersQuery,
+    usePlayerQuery,
+    useCreatePlayerMutation,
+    useDeletePlayerMutation,
 } = puppyBowlApi;
