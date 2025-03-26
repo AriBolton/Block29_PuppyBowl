@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCreatePlayerMutation } from '../api/puppyBowlApi';
 
-const CreatePuppyForm = () => {
+const CreatePuppyForm = ({ onSuccess }) => {
     const [createPlayer] = useCreatePlayerMutation();
     const [formData, setFormData] = useState({
         name: '',
@@ -13,13 +13,14 @@ const CreatePuppyForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createPlayer(formData);
+            await createPlayer(formData).unwrap();
             setFormData({
                 name: '',
                 breed: '',
                 imageUrl: '',
                 status: 'bench'
             });
+            onSuccess?.(); // Call the onSuccess callback to close the form
         } catch (error) {
             console.error('Failed to create puppy:', error);
         }

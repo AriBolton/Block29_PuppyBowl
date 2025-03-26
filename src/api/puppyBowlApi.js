@@ -16,10 +16,12 @@ export const puppyBowlApi = createApi({
         // Define an endpoint that fetches all players
         players: builder.query({
             query: () => "/players",
+            providesTags: ['Players'],
         }),
         // Define an endpoint that fetches a single player by ID
         player: builder.query({
             query: (id) => `/players/${id}`,
+            providesTags: (result, error, id) => [{ type: 'Players', id }],
         }),
         // Define an endpoint to create a new player
         createPlayer: builder.mutation({
@@ -28,6 +30,7 @@ export const puppyBowlApi = createApi({
                 method: "POST",
                 body: player,
             }),
+            invalidatesTags: ['Players'],
         }),
         // Define an endpoint to delete a player
         deletePlayer: builder.mutation({
@@ -35,6 +38,7 @@ export const puppyBowlApi = createApi({
                 url: `/players/${id}`,
                 method: "DELETE",
             }),
+            invalidatesTags: ['Players'],
         }),
     }),
 });

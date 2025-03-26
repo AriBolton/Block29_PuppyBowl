@@ -42,7 +42,7 @@ const Players = () => {
 
     const handleDelete = async (id) => {
         try {
-            await deletePlayer(id);
+            await deletePlayer(id).unwrap();
         } catch (error) {
             console.error('Failed to delete puppy:', error);
         }
@@ -71,7 +71,7 @@ const Players = () => {
                 {showCreateForm ? 'Hide Form' : 'Add New Puppy'}
             </button>
 
-            {showCreateForm && <CreatePuppyForm />}
+            {showCreateForm && <CreatePuppyForm onSuccess={() => setShowCreateForm(false)} />}
 
             <div className="players">
                 {/* Map through the data array and generate a div for each player */}
